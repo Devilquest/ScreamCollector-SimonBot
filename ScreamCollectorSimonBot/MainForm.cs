@@ -61,16 +61,17 @@ namespace ScreamCollectorSimonBot
 		/// </summary>
 		private void StartBot()
 		{
-			isPlaying = true;
-
 			//Reset variables
-			lastLevelPlayed = 0;
+			lastLevelPlayed = (int) (levelToStartNumericUpDown.Value - 1);
 			simonPositions.Clear();
 
 			//Update UI
+			levelToStartNumericUpDown.Enabled = false;
 			startButton.Text = "STOP";
 			statusLabel.Text = "Playing...";
-			levelLabel.Text = "Level: 1";
+			levelLabel.Text = "Level: " + levelToStartNumericUpDown.Value;
+
+			isPlaying = true;
 
 			loopTimer.Start();
 		}
@@ -84,6 +85,7 @@ namespace ScreamCollectorSimonBot
 			loopTimer.Stop();
 
 			//Update UI
+			levelToStartNumericUpDown.Enabled = true;
 			startButton.Text = "PLAY";
 			statusLabel.Text = "Stopped!";
 		}
@@ -113,6 +115,7 @@ namespace ScreamCollectorSimonBot
 					isPlaying = false;
 
 					//Update UI
+					levelToStartNumericUpDown.Enabled = true;
 					statusLabel.Text = "Completed!";
 					startButton.Text = "PLAY";
 				}
